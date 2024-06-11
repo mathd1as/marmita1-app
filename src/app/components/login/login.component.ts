@@ -25,6 +25,13 @@ export class LoginComponent {
 
   onSubmit(): void {
     console.log(this.loginForm.value);
-    this.loginService.authenticate();
+    this.loginService.authenticate().subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
