@@ -1,17 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { env } from '../../constants';
 
 @Injectable({
   providedIn: 'any',
 })
 export class LoginService {
-  private apiUrl = 'https://api.exemplo.com';
-
   constructor(private http: HttpClient) {}
 
-  authenticate(): Observable<any> {
-    console.log('here');
-    return this.http.get<any>(`${this.apiUrl}/dados`);
+  authenticate(body: any): Observable<any> {
+    return this.http.post<any>(`${env.API_URL}/auth/login`, body);
   }
 }

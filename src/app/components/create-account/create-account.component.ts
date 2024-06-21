@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CreateAccountService } from './create-account.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-account',
@@ -32,11 +32,9 @@ export class CreateAccountComponent {
     };
     this.createAccountService.register(payloadBody).subscribe(
       (reponse) => {
-        // console.log(reponse);
         this._snackBar.open('Email cadastrado com sucesso', 'fechar');
       },
       (response) => {
-        // console.log(response);
         if (response.error.log === 'email_already_registered') {
           this._snackBar.open('Email ja cadastrado', 'fechar');
         }
