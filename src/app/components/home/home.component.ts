@@ -14,10 +14,11 @@ export class HomeComponent {
   public user = {
     email: 'default',
     id: 'default',
-    password: 'default',
+    name: 'default',
   };
   ngOnInit(): void {
-    this.homeService.getUser('490f08d1-4185-4031-9bf7-008a3eba9fe4').subscribe(
+    const userId = localStorage.getItem('userId') || '';
+    this.homeService.getUser(userId).subscribe(
       (response) => {
         console.log(response);
         this.user = { ...response };

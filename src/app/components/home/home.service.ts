@@ -15,7 +15,6 @@ export class HomeService {
       'authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-    console.log(headers);
     return this.http.get<any>(`${env.API_URL}/users/${id}`, { headers });
   }
 }
