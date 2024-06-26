@@ -18,14 +18,14 @@ export class HomeComponent {
   };
   ngOnInit(): void {
     const userId = localStorage.getItem('userId') || '';
-    this.homeService.getUser(userId).subscribe(
-      (response) => {
-        console.log(response);
-        this.user = { ...response };
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // this.homeService.getUser(userId).subscribe(
+    //   (response) => {
+    //     console.log(response);
+    //     this.user = { ...response };
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
 }

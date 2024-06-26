@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { SessionService } from '../../session/session.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private sessionService: SessionService,
     private router: Router
   ) {}
 
@@ -32,9 +34,7 @@ export class LoginComponent {
     };
     this.loginService.authenticate(payloadBody).subscribe(
       (response) => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('userId', response.user.id);
-        localStorage.setItem('userEmail', response.user.email);
+        this.sessionService.save(response);
         this.router.navigate(['/home']);
       },
       (error) => {
