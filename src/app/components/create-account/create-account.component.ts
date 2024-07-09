@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateAccountService } from './create-account.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,9 +14,9 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent {
   public loginForm: FormGroup = this.formBuilder.group({
-    name: [''],
-    email: [''],
-    password: [''],
+    name: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   constructor(
@@ -42,6 +42,11 @@ export class CreateAccountComponent {
         }
       }
     );
+  }
+
+  isValidInputs() {
+    if (this.loginForm.get('name')?.errors || this.loginForm.get('password')?.errors || this.loginForm.get('email')?.errors) return false;
+    return true;
   }
 
   redirectToLoginPage(){
