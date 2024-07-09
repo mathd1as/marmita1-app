@@ -4,6 +4,7 @@ import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { SessionService } from '../../session/session.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -38,13 +40,14 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       (error) => {
+        this._snackBar.open('Email ou senha inválidos.', 'fechar');
         console.log(error);
       }
     );
   }
 
   isValidInputs() {
-    if (this.loginForm.get('login')?.errors && this.loginForm.get('password')?.errors) return false;
+    if (this.loginForm.get('login')?.errors || this.loginForm.get('password')?.errors) return false;
     return true;
   }
 }
