@@ -17,15 +17,6 @@ export class HomeComponent {
     name: 'default',
   };
   ngOnInit(): void {
-    const userId = localStorage.getItem('userId') || '';
-    // this.homeService.getUser(userId).subscribe(
-    //   (response) => {
-    //     console.log(response);
-    //     this.user = { ...response };
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    const userId = localStorage.getItem('userId');
   }
 }
