@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CreateAccountService } from './create-account.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -21,7 +22,8 @@ export class CreateAccountComponent {
   constructor(
     private formBuilder: FormBuilder,
     private createAccountService: CreateAccountService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
   onSubmit(): void {
@@ -40,5 +42,9 @@ export class CreateAccountComponent {
         }
       }
     );
+  }
+
+  redirectToLoginPage(){
+    this.router.navigate(['/account/login']);
   }
 }

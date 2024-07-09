@@ -50,4 +50,8 @@ export class LoginComponent {
     if (this.loginForm.get('login')?.errors || this.loginForm.get('password')?.errors) return false;
     return true;
   }
+
+  redirectToRegistrationPage(){
+    this.router.navigate(['/account/registration']);
+  }
 }
