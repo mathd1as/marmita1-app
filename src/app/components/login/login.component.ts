@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
@@ -14,8 +14,8 @@ import { SessionService } from '../../session/session.service';
 })
 export class LoginComponent {
   public loginForm: FormGroup = this.formBuilder.group({
-    login: [''],
-    password: [''],
+    login: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   constructor(
@@ -41,5 +41,10 @@ export class LoginComponent {
         console.log(error);
       }
     );
+  }
+
+  isValidInputs() {
+    if (this.loginForm.get('login')?.errors && this.loginForm.get('password')?.errors) return false;
+    return true;
   }
 }
